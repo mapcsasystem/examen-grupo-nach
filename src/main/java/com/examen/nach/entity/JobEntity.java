@@ -10,7 +10,9 @@ public class JobEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "job_id", nullable = false, unique = true)
     private Integer jobId;
+    @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "salary", nullable = false)
     private Double salary;
 
     @OneToMany(mappedBy="job")

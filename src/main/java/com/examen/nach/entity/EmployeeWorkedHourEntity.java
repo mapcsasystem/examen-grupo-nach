@@ -10,8 +10,10 @@ public class EmployeeWorkedHourEntity {
     @Column(name = "employee_worked_hour_id", nullable = false, unique = true)
     private Integer employeeWorkedHourId;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "salary", nullable = false)
     private Double salary;
 
     @ManyToOne

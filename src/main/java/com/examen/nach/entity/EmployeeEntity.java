@@ -8,20 +8,22 @@ import java.util.List;
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id",unique = true)
+    @Column(name = "employee_id",nullable = false, unique = true)
     private Integer employeeId;
 
+    @Column(name = "name",nullable = false)
     private String name;
 
     @Column(name = "gender_id")
     private Integer genderId;
 
-    @Column(name = "job_id")
+    @Column(name = "job_id",nullable = false)
     private Integer jobId;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name",nullable = false)
     private String lastName;
 
+    @Column(name = "birthdate",nullable = false)
     private LocalDate birthdate;
 
     @ManyToOne

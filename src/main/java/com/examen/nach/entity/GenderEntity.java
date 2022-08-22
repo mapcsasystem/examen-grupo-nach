@@ -11,6 +11,7 @@ public class GenderEntity {
     @Column(name = "gender_id",nullable = false,  unique = true)
     private Integer genderId;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy="gender")
