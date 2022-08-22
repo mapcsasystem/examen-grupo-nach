@@ -1,38 +1,46 @@
 package com.examen.nach.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="employees")
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employyee_id",nullable = false,unique = true)
-    private Integer employyeeId;
+    @Column(name = "employee_id",unique = true)
+    private Integer employeeId;
 
-    @Column(name = "name",nullable = false)
     private String name;
 
-    @Column(name = "gender-id",nullable = false)
+    @Column(name = "gender_id")
     private Integer genderId;
 
-    @Column(name = "job-id",nullable = false)
+    @Column(name = "job_id")
     private Integer jobId;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birthdate",nullable = false)
     private LocalDate birthdate;
 
+    @ManyToOne
+    @JoinColumn(name="gender_id",insertable = false,updatable = false)
+    private GenderEntity gender;
 
+    @ManyToOne
+    @JoinColumn(name="job_id",insertable = false,updatable = false)
+    private JobEntity job;
 
-    public Integer getEmployyeeId() {
-        return employyeeId;
+    @OneToMany(mappedBy="employee_worked_hour")
+    private List<EmployeeWorkedHourEntity> employeeWorkedHour;
+
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployyeeId(Integer employyeeId) {
-        this.employyeeId = employyeeId;
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {

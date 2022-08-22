@@ -1,24 +1,22 @@
 package com.examen.nach.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name="employee_worked_hours")
 public class EmployeeWorkedHourEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_worked_hour_id",nullable = false,unique = true)
+    @Column(name = "employee_worked_hour_id", nullable = false, unique = true)
     private Integer employeeWorkedHourId;
 
-    @Column(name = "employyee_id",nullable = false)
-    private Integer employyeeId;
+    private String name;
 
-    @Column(name = "worked_hours",nullable = false)
-    private Integer workedHours;
+    private Double salary;
 
-    @Column(name = "worked_date",nullable = false)
-    private LocalDate workedDate;
+    @ManyToOne
+    @JoinColumn(name="employee_worked_hour_id",insertable = false,updatable = false)
+    private EmployeeEntity employee_worked_hour;
 
     public Integer getEmployeeWorkedHourId() {
         return employeeWorkedHourId;
@@ -28,27 +26,19 @@ public class EmployeeWorkedHourEntity {
         this.employeeWorkedHourId = employeeWorkedHourId;
     }
 
-    public Integer getEmployyeeId() {
-        return employyeeId;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployyeeId(Integer employyeeId) {
-        this.employyeeId = employyeeId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getWorkedHours() {
-        return workedHours;
+    public Double getSalary() {
+        return salary;
     }
 
-    public void setWorkedHours(Integer workedHours) {
-        this.workedHours = workedHours;
-    }
-
-    public LocalDate getWorkedDate() {
-        return workedDate;
-    }
-
-    public void setWorkedDate(LocalDate workedDate) {
-        this.workedDate = workedDate;
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 }
