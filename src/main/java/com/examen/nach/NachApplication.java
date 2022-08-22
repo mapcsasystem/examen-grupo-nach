@@ -12,6 +12,7 @@ public class NachApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(NachApplication.class, args);
+
     }
 
     public NachApplication(IBeanConnectDb iBeanConnectDb) {
