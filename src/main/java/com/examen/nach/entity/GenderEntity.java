@@ -9,19 +9,19 @@ public class GenderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "gender_id",nullable = false,  unique = true)
-    private Integer genderId;
+    private Long genderId;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy="gender")
-    private List<EmployeeEntity> employees;
-
-    public Integer getGenderId() {
+    public Long getGenderId() {
         return genderId;
     }
 
-    public void setGenderId(Integer genderId) {
+    @OneToMany(mappedBy = "genders")
+    private List<EmployeeEntity> employees;
+
+    public void setGenderId(Long genderId) {
         this.genderId = genderId;
     }
 

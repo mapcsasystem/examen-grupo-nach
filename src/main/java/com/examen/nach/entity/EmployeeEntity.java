@@ -9,16 +9,16 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id",nullable = false, unique = true)
-    private Integer employeeId;
+    private Long employeeId;
 
-    @Column(name = "name",nullable = false)
-    private String name;
-
-    @Column(name = "gender_id")
+    @Column(name = "gender_id" , nullable = false)
     private Integer genderId;
 
     @Column(name = "job_id",nullable = false)
     private Integer jobId;
+
+    @Column(name = "name",nullable = false)
+    private String name;
 
     @Column(name = "last_name",nullable = false)
     private String lastName;
@@ -27,30 +27,21 @@ public class EmployeeEntity {
     private LocalDate birthdate;
 
     @ManyToOne
-    @JoinColumn(name="gender_id",insertable = false,updatable = false)
-    private GenderEntity gender;
+    @JoinColumn(name = "gender_id", insertable = false,updatable = true)
+    private GenderEntity genders;
 
     @ManyToOne
-    @JoinColumn(name="job_id",insertable = false,updatable = false)
-    private JobEntity job;
+    @JoinColumn(name = "job_id", insertable = false,updatable = true)
+    private JobEntity jobs;
 
-    @OneToMany(mappedBy="employee_worked_hour")
-    private List<EmployeeWorkedHourEntity> employeeWorkedHour;
-
-    public Integer getEmployeeId() {
+    @OneToMany(mappedBy = "employeeWorkedHours")
+    private List<EmployeeWorkedHourEntity> employeeWorkedHours;
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Integer getGenderId() {
@@ -67,6 +58,14 @@ public class EmployeeEntity {
 
     public void setJobId(Integer jobId) {
         this.jobId = jobId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {

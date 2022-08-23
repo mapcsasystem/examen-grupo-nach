@@ -1,6 +1,7 @@
 package com.examen.nach.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="employee_worked_hours")
@@ -8,7 +9,10 @@ public class EmployeeWorkedHourEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_worked_hour_id", nullable = false, unique = true)
-    private Integer employeeWorkedHourId;
+    private Long employeeWorkedHourId;
+
+    @Column(name = "employee_id", nullable = false)
+    private String employeeId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -17,15 +21,23 @@ public class EmployeeWorkedHourEntity {
     private Double salary;
 
     @ManyToOne
-    @JoinColumn(name="employee_worked_hour_id",insertable = false,updatable = false)
-    private EmployeeEntity employee_worked_hour;
+    @JoinColumn(name = "employee_id", insertable = false,updatable = true)
+    private EmployeeWorkedHourEntity employeeWorkedHours;
 
-    public Integer getEmployeeWorkedHourId() {
+    public Long getEmployeeWorkedHourId() {
         return employeeWorkedHourId;
     }
 
-    public void setEmployeeWorkedHourId(Integer employeeWorkedHourId) {
+    public void setEmployeeWorkedHourId(Long employeeWorkedHourId) {
         this.employeeWorkedHourId = employeeWorkedHourId;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {
@@ -43,4 +55,5 @@ public class EmployeeWorkedHourEntity {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
+
 }
