@@ -4,6 +4,8 @@ import com.examen.nach.crud.employee.IEmployeesImp;
 import com.examen.nach.crud.gender.IGenderImp;
 import com.examen.nach.crud.job.IJobImp;
 import com.examen.nach.entity.Employee;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,29 +13,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeResController {
     @Autowired
-    private final IEmployeesImp employeesImp;
+    private  IEmployeesImp employeesImp;
     @Autowired
-    private final IJobImp jobImp;
+    private  IJobImp jobImp;
     @Autowired
-    private final IGenderImp genderImp;
+    private  IGenderImp genderImp;
 
-    public EmployeeResController(IEmployeesImp employeesImp, IJobImp jobImp, IGenderImp genderImp) {
-        this.employeesImp = employeesImp;
-        this.jobImp = jobImp;
-        this.genderImp = genderImp;
-    }
+
     @GetMapping("/get-all")
-    List<Employee> getAllEmployees() {
-        return employeesImp.getAllEmployees();
+    ResponseEntity<List<Employee>> getAllEmployees() {
+        return new ResponseEntity<>(employeesImp.getAllEmployees(),HttpStatus.OK);
     }
 
     @GetMapping("/get-by-id/{id}")
@@ -51,35 +46,51 @@ public class EmployeeResController {
         }
     }
 
-    @PostMapping(value = "/create")
-    ResponseEntity<Map<String, String>>saveEmployee(@RequestBody Employee employee){
-        Map<String,String> map=new HashMap<>();
+    @GetMapping(value = "/get-by-job-id/{job_id}")
+    ResponseEntity<Map<String, Object>> getEmployeeByJobId(@PathVariable("job_id") long id){
+        Map<String,Object> map=new HashMap<>();
+        if (jobImp.getByIdJob(id).isEmpty()) {
+            map.put("employees", new ArrayList());
+            map.put("success", false);
+            return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
+        }
+        List<Employee> employee=employeesImp.findByJobId(id);
+        map.put("employees", employee);
+        map.put("success", true);
+        return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
+    }
 
+
+    @PostMapping(value = "/create")
+    ResponseEntity<Map<String, Object>>saveEmployee(@RequestBody Employee employee){
+        Map<String,Object> map=new HashMap<>();
         long age = LocalDate.from(employee.getBirthdate()).until(LocalDate.now(), ChronoUnit.YEARS);
         if (age <= 18) {
-            map.put("id", "null" + "18");
-            map.put("success", "false");
+            map.put("id", null);
+            map.put("success", false);
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
        if (jobImp.getByIdJob(employee.getJobId()).isEmpty()) {
-           map.put("id", "null");
-           map.put("success", "false");
+           map.put("id", null );
+           map.put("successjob", false);
            return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
         if (genderImp.getByIdGender(employee.getGenderId()).isEmpty()) {
-            map.put("id", "null");
-            map.put("success", "false");
+            map.put("id", null);
+            map.put("successgender", false);
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
         if (!employeesImp.findByNameAndLastName(employee.getName(), employee.getLastName()).isEmpty()) {
-            map.put("id", "null"+ "Name and lastName");
-            map.put("success", "false");
+            map.put("id", null);
+            map.put("success", false);
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
         Employee empl=employeesImp.createEmployee(employee);
         map.put("id", empl.getEmployeeId().toString());
-        map.put("success", "true");
+        map.put("success", true);
         return new ResponseEntity<>(map,HttpStatus.CREATED);
     }
+
+
 
 }

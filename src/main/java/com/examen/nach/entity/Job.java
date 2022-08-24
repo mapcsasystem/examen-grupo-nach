@@ -13,7 +13,7 @@ public class Job {
     private String name;
     private Double salary;
 
-    @OneToMany(mappedBy = "jobs",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jobs")
     private List<Employee> employees;
 
     public Job() {

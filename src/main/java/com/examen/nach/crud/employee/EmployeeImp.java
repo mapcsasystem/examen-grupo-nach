@@ -32,4 +32,9 @@ public class EmployeeImp implements IEmployeesImp{
     public List<Employee> findByNameAndLastName(String name, String lastName) {
         return employeeService.findByNameAndLastName(name, lastName);
     }
+
+    @Override
+    public List<Employee> findByJobId(Long jobId) {
+        return employeeService.findByJobId(jobId);
+    }
 }

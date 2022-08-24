@@ -14,10 +14,13 @@ public class EmployeeWorkedHour {
     private String name;
 
     @Column(name = "employee_id")
-    private String employeeId;
+    private Long employeeId;
 
-    @Column(name = "salary")
-    private Double salary;
+    @Column(name = "worker_hours")
+    private Integer workedHours;
+
+    @Column(name = "worker_date")
+    private LocalDate workedDate;
 
     @ManyToOne
     @JoinColumn(name="employee_id",insertable = false,updatable = false)
@@ -26,11 +29,12 @@ public class EmployeeWorkedHour {
     public EmployeeWorkedHour() {
     }
 
-    public EmployeeWorkedHour(Long idEmployeeWorkedHour, String name, String employeeId, Double salary, Employee employees) {
+    public EmployeeWorkedHour(Long idEmployeeWorkedHour, String name, Long employeeId, Integer workedHours, LocalDate workedDate, Employee employees) {
         this.idEmployeeWorkedHour = idEmployeeWorkedHour;
         this.name = name;
         this.employeeId = employeeId;
-        this.salary = salary;
+        this.workedHours = workedHours;
+        this.workedDate = workedDate;
         this.employees = employees;
     }
 
@@ -50,20 +54,28 @@ public class EmployeeWorkedHour {
         this.name = name;
     }
 
-    public String getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Double getSalary() {
-        return salary;
+    public Integer getWorkedHours() {
+        return workedHours;
     }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
+    public void setWorkedHours(Integer workedHours) {
+        this.workedHours = workedHours;
+    }
+
+    public LocalDate getWorkedDate() {
+        return workedDate;
+    }
+
+    public void setWorkedDate(LocalDate workedDate) {
+        this.workedDate = workedDate;
     }
 
     public Employee getEmployees() {
@@ -80,7 +92,8 @@ public class EmployeeWorkedHour {
                 "idEmployeeWorkedHour=" + idEmployeeWorkedHour +
                 ", name='" + name + '\'' +
                 ", employeeId='" + employeeId + '\'' +
-                ", salary=" + salary +
+                ", workedHours=" + workedHours +
+                ", workedDate=" + workedDate +
                 ", employees=" + employees +
                 '}';
     }

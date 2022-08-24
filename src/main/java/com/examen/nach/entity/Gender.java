@@ -16,7 +16,7 @@ public class Gender {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "genders",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "genders")
     private List<Employee> employees;
 
     public Gender() {

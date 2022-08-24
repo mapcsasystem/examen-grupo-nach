@@ -29,4 +29,10 @@ public class EmployeeService {
     public List<Employee> findByNameAndLastName(String name, String lastName){
         return employeeRepository.findByNameAndLastName(name,lastName);
     }
+
+  public List<Employee> findByJobId(Long jobId){
+        return employeeRepository.findByJobId(jobId);
+    }
+
+
 }

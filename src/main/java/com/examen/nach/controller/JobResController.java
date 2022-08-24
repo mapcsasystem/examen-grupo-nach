@@ -15,11 +15,7 @@ import java.util.Map;
 public class JobResController {
 
     @Autowired
-    private final IJobImp jobImp;
-
-    public JobResController(IJobImp jobImp) {
-        this.jobImp = jobImp;
-    }
+    private  IJobImp jobImp;
 
     @GetMapping("/get-all")
     List<Job> getAllEmployees() {

@@ -11,4 +11,5 @@ public interface IEmployeesImp {
     Employee createEmployee(Employee employee);
 
     List<Employee> findByNameAndLastName(String name, String lastName);
+    List<Employee> findByJobId(Long jobId);
 }

@@ -32,23 +32,10 @@ public class Employee {
     @JoinColumn(name="gender_id",insertable = false,updatable = false)
     private Gender genders;
 
-    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employees")
     private List<EmployeeWorkedHour> employeeWorkedHour;
 
-    public Employee() {
-    }
 
-    public Employee(Long employeeId, String name, Long genderId, Long jobId, String lastName, LocalDate birthdate, Job jobs, Gender genders, List<EmployeeWorkedHour> employeeWorkedHour) {
-        this.employeeId = employeeId;
-        this.name = name;
-        this.genderId = genderId;
-        this.jobId = jobId;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.jobs = jobs;
-        this.genders = genders;
-        this.employeeWorkedHour = employeeWorkedHour;
-    }
 
     public Long getEmployeeId() {
         return employeeId;
