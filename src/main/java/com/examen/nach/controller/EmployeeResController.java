@@ -71,7 +71,7 @@ public class EmployeeResController {
             map.put("success", "false");
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
-        if (employeesImp.findByNameAndLastName(employee.getName(), employee.getLastName()).isEmpty()) {
+        if (!employeesImp.findByNameAndLastName(employee.getName(), employee.getLastName()).isEmpty()) {
             map.put("id", "null"+ "Name and lastName");
             map.put("success", "false");
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
