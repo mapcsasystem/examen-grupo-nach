@@ -1,6 +1,7 @@
 package com.examen.nach.crud.gender;
 
 import com.examen.nach.entity.Gender;
+import com.examen.nach.entity.Job;
 import com.examen.nach.service.GenderService;
 
 import java.util.List;
@@ -21,5 +22,10 @@ public class GenderImp implements IGenderImp {
     @Override
     public Optional<Gender> getByIdGender(long id) {
         return genderService.getByIdGender(id);
+    }
+
+    @Override
+    public Gender createGender(Gender gender) {
+        return genderService.createGender(gender);
     }
 }

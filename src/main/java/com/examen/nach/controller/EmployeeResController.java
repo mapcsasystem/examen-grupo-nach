@@ -42,7 +42,7 @@ public class EmployeeResController {
         Map<String,String> map=new HashMap<>();
         if(employee.isPresent()){
             map.put("sucess","true");
-            map.put("id",employee.toString());
+            map.put("id",""+id);
             return map;
         }else{
             map.put("sucess","true");
@@ -62,12 +62,12 @@ public class EmployeeResController {
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
        if (jobImp.getByIdJob(employee.getJobId()).isEmpty()) {
-           map.put("id", "null"+ "joBID");
+           map.put("id", "null");
            map.put("success", "false");
            return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
-        if (genderImp.getByIdGender(employee.getJobId()).isEmpty()) {
-            map.put("id", "null"+ "genderID");
+        if (genderImp.getByIdGender(employee.getGenderId()).isEmpty()) {
+            map.put("id", "null");
             map.put("success", "false");
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }

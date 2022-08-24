@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface IJobImp {
     List<Job> getAllJob();
     Optional<Job> getByIdJob(long id);
+    Job createJob(Job job);
 }

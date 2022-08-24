@@ -22,4 +22,9 @@ public class JobImp implements IJobImp {
     public Optional<Job> getByIdJob(long id) {
         return jobService.getByIdJob(id);
     }
+
+    @Override
+    public Job createJob(Job job) {
+        return jobService.createJob(job);
+    }
 }

@@ -12,8 +12,8 @@ public class Employee {
     private Long employeeId;
     private String name;
 
-    @Column(name = "id_gender")
-    private Long idGender;
+    @Column(name = "gender_id")
+    private Long genderId;
 
     @Column(name = "job_id")
     private Long jobId;
@@ -38,10 +38,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, String name, Long idGender, Long jobId, String lastName, LocalDate birthdate, Job jobs, Gender genders, List<EmployeeWorkedHour> employeeWorkedHour) {
+    public Employee(Long employeeId, String name, Long genderId, Long jobId, String lastName, LocalDate birthdate, Job jobs, Gender genders, List<EmployeeWorkedHour> employeeWorkedHour) {
         this.employeeId = employeeId;
         this.name = name;
-        this.idGender = idGender;
+        this.genderId = genderId;
         this.jobId = jobId;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -66,12 +66,12 @@ public class Employee {
         this.name = name;
     }
 
-    public Long getIdGender() {
-        return idGender;
+    public Long getGenderId() {
+        return genderId;
     }
 
-    public void setIdGender(Long idGender) {
-        this.idGender = idGender;
+    public void setGenderId(Long genderId) {
+        this.genderId = genderId;
     }
 
     public Long getJobId() {
@@ -127,7 +127,7 @@ public class Employee {
         return "Employee{" +
                 "employeeId=" + employeeId +
                 ", name='" + name + '\'' +
-                ", idGender=" + idGender +
+                ", genderId=" + genderId +
                 ", jobId=" + jobId +
                 ", lastName='" + lastName + '\'' +
                 ", birthdate=" + birthdate +
