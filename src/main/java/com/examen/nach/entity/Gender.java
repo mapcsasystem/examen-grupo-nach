@@ -10,20 +10,20 @@ import java.util.List;
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gender_id",nullable = false,  unique = true)
+    @Column(name = "gender_id")
     private Long genderId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "genders",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<Employee> employees=new ArrayList<>();
+    @OneToMany(mappedBy = "genders",cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
     public Gender() {
     }
 
-    public Gender(String name, List<Employee> employees) {
+    public Gender(Long genderId, String name, List<Employee> employees) {
+        this.genderId = genderId;
         this.name = name;
         this.employees = employees;
     }

@@ -1,8 +1,6 @@
 package com.examen.nach.entity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,21 +8,19 @@ import java.util.List;
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_id", nullable = false, unique = true)
+    @Column(name = "job_id")
     private Long jobId;
-    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "salary", nullable = false)
     private Double salary;
 
-    @OneToMany(mappedBy = "jobs",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<Employee> employees=new ArrayList<>();
+    @OneToMany(mappedBy = "jobs",cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
     public Job() {
     }
 
-    public Job(String name, Double salary, List<Employee> employees) {
+    public Job(Long jobId, String name, Double salary, List<Employee> employees) {
+        this.jobId = jobId;
         this.name = name;
         this.salary = salary;
         this.employees = employees;

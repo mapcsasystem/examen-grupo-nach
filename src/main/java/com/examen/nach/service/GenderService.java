@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class GenderService {
 
-    private GenderRepository genderRepository;
+    private final GenderRepository genderRepository;
 
     public GenderService(GenderRepository genderRepository) {
         this.genderRepository = genderRepository;

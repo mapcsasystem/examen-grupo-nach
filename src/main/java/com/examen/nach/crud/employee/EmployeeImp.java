@@ -10,9 +10,9 @@ public class EmployeeImp implements IEmployeesImp{
     EmployeeService employeeService;
 
     public EmployeeImp(EmployeeService employeeService) {
-
         this.employeeService = employeeService;
     }
+
     @Override
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
@@ -24,7 +24,12 @@ public class EmployeeImp implements IEmployeesImp{
     }
 
     @Override
-    public Optional<Employee> createEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         return employeeService.createEmployee(employee);
+    }
+
+    @Override
+    public List<Employee> findByNameAndLastName(String name, String lastName) {
+        return employeeService.findByNameAndLastName(name, lastName);
     }
 }

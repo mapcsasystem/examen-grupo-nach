@@ -7,34 +7,39 @@ import java.time.LocalDate;
 public class EmployeeWorkedHour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_worked_hour_id")
+    private Long idEmployeeWorkedHour;
 
-    @Column(name = "employee_worked_hour_id", nullable = false, unique = true)
-    private Long employeeWorkedHourId;
-
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "salary", nullable = false)
+    @Column(name = "employee_id")
+    private String employeeId;
+
+    @Column(name = "salary")
     private Double salary;
 
     @ManyToOne
+    @JoinColumn(name="employee_id",insertable = false,updatable = false)
     private Employee employees;
 
     public EmployeeWorkedHour() {
     }
 
-    public EmployeeWorkedHour(String name, Double salary, Employee employees) {
+    public EmployeeWorkedHour(Long idEmployeeWorkedHour, String name, String employeeId, Double salary, Employee employees) {
+        this.idEmployeeWorkedHour = idEmployeeWorkedHour;
         this.name = name;
+        this.employeeId = employeeId;
         this.salary = salary;
         this.employees = employees;
     }
 
-    public Long getEmployeeWorkedHourId() {
-        return employeeWorkedHourId;
+    public Long getIdEmployeeWorkedHour() {
+        return idEmployeeWorkedHour;
     }
 
-    public void setEmployeeWorkedHourId(Long employeeWorkedHourId) {
-        this.employeeWorkedHourId = employeeWorkedHourId;
+    public void setIdEmployeeWorkedHour(Long idEmployeeWorkedHour) {
+        this.idEmployeeWorkedHour = idEmployeeWorkedHour;
     }
 
     public String getName() {
@@ -43,6 +48,14 @@ public class EmployeeWorkedHour {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public Double getSalary() {
@@ -64,8 +77,9 @@ public class EmployeeWorkedHour {
     @Override
     public String toString() {
         return "EmployeeWorkedHour{" +
-                "employeeWorkedHourId=" + employeeWorkedHourId +
+                "idEmployeeWorkedHour=" + idEmployeeWorkedHour +
                 ", name='" + name + '\'' +
+                ", employeeId='" + employeeId + '\'' +
                 ", salary=" + salary +
                 ", employees=" + employees +
                 '}';

@@ -26,4 +26,7 @@ public class EmployeeService {
     public Employee createEmployee(Employee employee){
         return employeeRepository.save(employee);
     }
+    public List<Employee> findByNameAndLastName(String name, String lastName){
+        return employeeRepository.findByNameAndLastName(name,lastName);
+    }
 }

@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface IEmployeesImp {
     List<Employee> getAllEmployees();
     Optional<Employee> getByIdEmployee(long id);
-    Optional<Employee> createEmployee(Employee employee);
+    Employee createEmployee(Employee employee);
+
+    List<Employee> findByNameAndLastName(String name, String lastName);
 }

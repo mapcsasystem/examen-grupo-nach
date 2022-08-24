@@ -1,7 +1,6 @@
 package com.examen.nach.crud.gender;
 
 
-import com.examen.nach.entity.Employee;
 import com.examen.nach.entity.Gender;
 
 import java.util.List;

@@ -1,10 +1,6 @@
 package com.examen.nach.entity;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,47 +8,46 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id",nullable = false, unique = true)
+    @Column(name = "employee_id")
     private Long employeeId;
-
-    @Column(name = "gender_id" , nullable = false)
-    private Long genderId;
-
-    @Column(name = "job_id",nullable = false)
-    private Long jobId;
-
-    @Column(name = "name",nullable = false)
     private String name;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "id_gender")
+    private Long idGender;
+
+    @Column(name = "job_id")
+    private Long jobId;
+
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birthdate",nullable = false)
+    @Column(name = "birthdate")
     private LocalDate birthdate;
 
     @ManyToOne
+    @JoinColumn(name="job_id",insertable = false,updatable = false)
     private Job jobs;
 
     @ManyToOne
+    @JoinColumn(name="gender_id",insertable = false,updatable = false)
     private Gender genders;
 
-    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JsonManagedReference
-    @Column(name = "employee_worked_hours")
-    private List<EmployeeWorkedHour> employeeWorkedHours=new ArrayList<>();
+    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
+    private List<EmployeeWorkedHour> employeeWorkedHour;
 
     public Employee() {
     }
 
-    public Employee(Long genderId, Long jobId, String name, String lastName, LocalDate birthdate, Job jobs, Gender genders, List<EmployeeWorkedHour> employeeWorkedHours) {
-        this.genderId = genderId;
-        this.jobId = jobId;
+    public Employee(Long employeeId, String name, Long idGender, Long jobId, String lastName, LocalDate birthdate, Job jobs, Gender genders, List<EmployeeWorkedHour> employeeWorkedHour) {
+        this.employeeId = employeeId;
         this.name = name;
+        this.idGender = idGender;
+        this.jobId = jobId;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.jobs = jobs;
         this.genders = genders;
-        this.employeeWorkedHours = employeeWorkedHours;
+        this.employeeWorkedHour = employeeWorkedHour;
     }
 
     public Long getEmployeeId() {
@@ -63,12 +58,20 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public Long getGenderId() {
-        return genderId;
+    public String getName() {
+        return name;
     }
 
-    public void setGenderId(Long genderId) {
-        this.genderId = genderId;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getIdGender() {
+        return idGender;
+    }
+
+    public void setIdGender(Long idGender) {
+        this.idGender = idGender;
     }
 
     public Long getJobId() {
@@ -77,14 +80,6 @@ public class Employee {
 
     public void setJobId(Long jobId) {
         this.jobId = jobId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLastName() {
@@ -119,26 +114,26 @@ public class Employee {
         this.genders = genders;
     }
 
-    public List<EmployeeWorkedHour> getEmployeeWorkedHours() {
-        return employeeWorkedHours;
+    public List<EmployeeWorkedHour> getEmployeeWorkedHour() {
+        return employeeWorkedHour;
     }
 
-    public void setEmployeeWorkedHours(List<EmployeeWorkedHour> employeeWorkedHours) {
-        this.employeeWorkedHours = employeeWorkedHours;
+    public void setEmployeeWorkedHour(List<EmployeeWorkedHour> employeeWorkedHour) {
+        this.employeeWorkedHour = employeeWorkedHour;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "employeeId=" + employeeId +
-                ", genderId=" + genderId +
-                ", jobId=" + jobId +
                 ", name='" + name + '\'' +
+                ", idGender=" + idGender +
+                ", jobId=" + jobId +
                 ", lastName='" + lastName + '\'' +
                 ", birthdate=" + birthdate +
                 ", jobs=" + jobs +
                 ", genders=" + genders +
-                ", employeeWorkedHours=" + employeeWorkedHours +
+                ", employeeWorkedHour=" + employeeWorkedHour +
                 '}';
     }
 }

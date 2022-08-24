@@ -15,11 +15,11 @@ public class JobImp implements IJobImp {
 
     @Override
     public List<Job> getAllJob() {
-        return null;
+        return jobService.getAllJob();
     }
 
     @Override
-    public boolean getByIdJob(long id) {
-        return Optional.empty();
+    public Optional<Job> getByIdJob(long id) {
+        return jobService.getByIdJob(id);
     }
 }

@@ -15,7 +15,7 @@ public class GenderImp implements IGenderImp {
 
     @Override
     public List<Gender> getAllGender() {
-        return null;
+        return genderService.getAllGender();
     }
 
     @Override
