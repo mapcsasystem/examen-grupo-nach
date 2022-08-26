@@ -4,8 +4,6 @@ import com.examen.nach.crud.employee.IEmployeesImp;
 import com.examen.nach.crud.gender.IGenderImp;
 import com.examen.nach.crud.job.IJobImp;
 import com.examen.nach.entity.Employee;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,16 +38,17 @@ public class EmployeeResController {
             map.put("id",""+id);
             return map;
         }else{
-            map.put("sucess","true");
+            map.put("sucess","false");
             map.put("id","null");
             return map;
         }
     }
 
-    @GetMapping(value = "/get-by-job-id/{job_id}")
-    ResponseEntity<Map<String, Object>> getEmployeeByJobId(@PathVariable("job_id") long id){
+    @GetMapping(value = "/get-by-job-id")
+    @ResponseBody
+    ResponseEntity<Map<String, Object>> getEmployeeByJobId(@RequestParam("job_id") long id){
         Map<String,Object> map=new HashMap<>();
-        if (jobImp.getByIdJob(id).isEmpty()) {
+        if (!jobImp.jobExists(id)) {
             map.put("employees", new ArrayList());
             map.put("success", false);
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
@@ -57,7 +56,7 @@ public class EmployeeResController {
         List<Employee> employee=employeesImp.findByJobId(id);
         map.put("employees", employee);
         map.put("success", true);
-        return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 
 
@@ -72,12 +71,12 @@ public class EmployeeResController {
         }
        if (jobImp.getByIdJob(employee.getJobId()).isEmpty()) {
            map.put("id", null );
-           map.put("successjob", false);
+           map.put("success", false);
            return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
         if (genderImp.getByIdGender(employee.getGenderId()).isEmpty()) {
             map.put("id", null);
-            map.put("successgender", false);
+            map.put("success", false);
             return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
         }
         if (!employeesImp.findByNameAndLastName(employee.getName(), employee.getLastName()).isEmpty()) {

@@ -7,51 +7,33 @@ import java.time.LocalDate;
 public class EmployeeWorkedHour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_worked_hour_id")
-    private Long idEmployeeWorkedHour;
+    @Column(name = "id")
+    private Long employeeWorkedHourId;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "employee_id")
+    @Column(name ="employee_id")
     private Long employeeId;
 
-    @Column(name = "worker_hours")
+    @Column(name = "worked_hours")
     private Integer workedHours;
 
-    @Column(name = "worker_date")
+    @Column(name = "worked_date")
     private LocalDate workedDate;
-
-    @ManyToOne
-    @JoinColumn(name="employee_id",insertable = false,updatable = false)
-    private Employee employees;
 
     public EmployeeWorkedHour() {
     }
 
-    public EmployeeWorkedHour(Long idEmployeeWorkedHour, String name, Long employeeId, Integer workedHours, LocalDate workedDate, Employee employees) {
-        this.idEmployeeWorkedHour = idEmployeeWorkedHour;
-        this.name = name;
+    public EmployeeWorkedHour(Long employeeId, Integer workedHours, LocalDate workedDate) {
         this.employeeId = employeeId;
         this.workedHours = workedHours;
         this.workedDate = workedDate;
-        this.employees = employees;
     }
 
-    public Long getIdEmployeeWorkedHour() {
-        return idEmployeeWorkedHour;
+    public Long getEmployeeWorkedHourId() {
+        return employeeWorkedHourId;
     }
 
-    public void setIdEmployeeWorkedHour(Long idEmployeeWorkedHour) {
-        this.idEmployeeWorkedHour = idEmployeeWorkedHour;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployeeWorkedHourId(Long employeeWorkedHourId) {
+        this.employeeWorkedHourId = employeeWorkedHourId;
     }
 
     public Long getEmployeeId() {
@@ -78,23 +60,13 @@ public class EmployeeWorkedHour {
         this.workedDate = workedDate;
     }
 
-    public Employee getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Employee employees) {
-        this.employees = employees;
-    }
-
     @Override
     public String toString() {
         return "EmployeeWorkedHour{" +
-                "idEmployeeWorkedHour=" + idEmployeeWorkedHour +
-                ", name='" + name + '\'' +
-                ", employeeId='" + employeeId + '\'' +
+                "employeeWorkedHourId=" + employeeWorkedHourId +
+                ", employeeId=" + employeeId +
                 ", workedHours=" + workedHours +
                 ", workedDate=" + workedDate +
-                ", employees=" + employees +
                 '}';
     }
 }

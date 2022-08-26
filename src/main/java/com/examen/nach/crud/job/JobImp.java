@@ -27,4 +27,9 @@ public class JobImp implements IJobImp {
     public Job createJob(Job job) {
         return jobService.createJob(job);
     }
+
+    @Override
+    public Boolean jobExists(long id) {
+        return jobService.jobExists(id);
+    }
 }

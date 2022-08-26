@@ -10,22 +10,16 @@ import java.util.List;
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gender_id")
+    @Column(name = "id")
     private Long genderId;
 
-    @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "genders")
-    private List<Employee> employees;
 
     public Gender() {
     }
 
-    public Gender(Long genderId, String name, List<Employee> employees) {
-        this.genderId = genderId;
+    public Gender(String name) {
         this.name = name;
-        this.employees = employees;
     }
 
     public Long getGenderId() {
@@ -44,20 +38,11 @@ public class Gender {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
     @Override
     public String toString() {
         return "Gender{" +
                 "genderId=" + genderId +
                 ", name='" + name + '\'' +
-                ", employees=" + employees +
                 '}';
     }
 }

@@ -9,4 +9,5 @@ public interface IJobImp {
     List<Job> getAllJob();
     Optional<Job> getByIdJob(long id);
     Job createJob(Job job);
+    Boolean jobExists(long id);
 }

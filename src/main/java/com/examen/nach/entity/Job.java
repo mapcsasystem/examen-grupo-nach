@@ -8,22 +8,17 @@ import java.util.List;
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_id")
+    @Column(name = "id")
     private Long jobId;
     private String name;
     private Double salary;
 
-    @OneToMany(mappedBy = "jobs")
-    private List<Employee> employees;
-
     public Job() {
     }
 
-    public Job(Long jobId, String name, Double salary, List<Employee> employees) {
-        this.jobId = jobId;
+    public Job(String name, Double salary) {
         this.name = name;
         this.salary = salary;
-        this.employees = employees;
     }
 
     public Long getJobId() {
@@ -50,21 +45,12 @@ public class Job {
         this.salary = salary;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
     @Override
     public String toString() {
         return "Job{" +
                 "jobId=" + jobId +
                 ", name='" + name + '\'' +
                 ", salary=" + salary +
-                ", employees=" + employees +
                 '}';
     }
 }

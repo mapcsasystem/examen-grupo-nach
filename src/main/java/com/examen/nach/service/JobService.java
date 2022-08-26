@@ -8,9 +8,13 @@ import java.util.Optional;
 
 @Service
 public class JobService {
-    private final JobRepository jobRepository;
+
+   private final JobRepository jobRepository;
     public JobService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
+    }
+    public boolean jobExists(Long id) {
+        return jobRepository.existsById(id);
     }
     public List<Job> getAllJob(){
         return jobRepository.findAll();
