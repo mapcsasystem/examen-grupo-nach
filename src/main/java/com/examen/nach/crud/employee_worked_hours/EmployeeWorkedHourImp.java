@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmployeeWorkedHourImp implements IEmployeeWorkedHourImp {
-    EmployeeWorkedHourService employeeWorkedHourService;
+     EmployeeWorkedHourService employeeWorkedHourService;
 
     public EmployeeWorkedHourImp(EmployeeWorkedHourService employeeWorkedHourService) {
         this.employeeWorkedHourService = employeeWorkedHourService;
@@ -33,6 +33,11 @@ public class EmployeeWorkedHourImp implements IEmployeeWorkedHourImp {
     @Override
     public List<EmployeeWorkedHour> findByWorkedDateAndEmployeeId(LocalDate workedDate, Long employeeId) {
         return employeeWorkedHourService.findByWorkedDateAndEmployeeId(workedDate,employeeId);
+    }
+
+    @Override
+    public List<EmployeeWorkedHour> findByWorkedDateBetween(LocalDate startDate, LocalDate endDate) {
+        return employeeWorkedHourService.findByWorkedDateBetween(startDate,endDate);
     }
 
 }

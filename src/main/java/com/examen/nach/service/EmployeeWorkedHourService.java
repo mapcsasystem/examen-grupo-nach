@@ -33,4 +33,7 @@ public class EmployeeWorkedHourService {
         return employeeWorkedHourRepository.findByWorkedDateAndEmployeeId(workedDate,employeeId);
     }
 
+    public List<EmployeeWorkedHour> findByWorkedDateBetween(LocalDate startDate ,LocalDate endDate){
+        return employeeWorkedHourRepository.findByWorkedDateBetween(startDate,endDate);
+    }
 }

@@ -11,4 +11,5 @@ public interface IEmployeeWorkedHourImp {
     Optional<EmployeeWorkedHour> getByIdEmployeeWorkedHour(long id);
     EmployeeWorkedHour createEmployeeWorkedHour(EmployeeWorkedHour employeeWorkedHour);
     List<EmployeeWorkedHour> findByWorkedDateAndEmployeeId(LocalDate workedDate, Long employeeId );
+    List<EmployeeWorkedHour> findByWorkedDateBetween(LocalDate startDate, LocalDate endDate );
 }
